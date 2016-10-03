@@ -53,7 +53,7 @@ polygon(x=c(0.5,1,1.5,1), y=c(1,1.5,1,0.5)+2.25, border="turquoise2", lwd=3)
 
 plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
 z <- seq(0, 2*pi, length = 500)
-polygon( 1 + cos(z)*.5, 1 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
+polygon( 1 + cos(z)*.5, 1 + sin(z)*.5 , col = NULL, border = "darkorchid", density = NULL, angle = NULL, lwd = 3)
 polygon( 1 + cos(z)*.5, 2.5 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
 polygon( 1 + cos(z)*.5, 4 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
 box()
@@ -66,15 +66,72 @@ box()
 
 
 plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
-polygon(x=c(0.5,0.5,1.5,1.5), y=c(0.5, 1.5,1.5,0.5), density = c(7), angle = c(45), col="deeppink1", lwd=3)
+polygon(x=c(0.5,0.5,1.5,1.5), y=c(0.5, 1.5,1.5,0.5), border = "deeppink1", density = NULL, angle = c(45), col="deeppink1", lwd=3)
 polygon(x=c(0.5,0.5,1.5,1.5), y=1.5+c(0.5, 1.5,1.5,0.5), density = c(7), angle = c(45), col="deeppink1", lwd=3)
-polygon(x=c(0.5,0.5,1.5,1.5), y=3+c(0.5, 1.5,1.5,0.5), density = c(7), angle = c(45), col="deeppink1", lwd=3)
+polygon(x=c(0.5,0.5,1.5,1.5), y=3+c(0.5, 1.5,1.5,0.5), density = NULL, angle = NULL, col=NULL, border = "deeppink1", lwd=3)
 box()
 
-?switch
-draw_card<-function(forme, nombre, remplissage, couleur){
-  vectcol<-c("deeppink1","darkorchid","turquoise2" )
-  couleur <- vectcol[couleur]
+draw_rectangle<-function(remplissage, couleur, hauteur){
+  x <- c(0.5,0.5,1.5,1.5)
+  y <- c(0.5, 1.5,1.5,0.5)
+  if (remplissage == 1){# 1 = vide
+    density <- NULL
+    angle <- NULL
+    border <- couleur
+    col <- NULL
+  }
+  if(remplissage == 2){# 2 = plein
+    density <- NULL
+    angle <- NULL
+    border <- couleur
+    col <- couleur
+  }
+  if(remplissage == 3){# 3 = hachures
+    density <- 7
+    angle <- 45
+    border <- NULL
+    col <- couleur
+  }
+  if ( hauteur == 1){
+    y <- y
+  }
+  if ( hauteur == 2){
+    y <- y+0.75
+  }
+  if ( hauteur == 3){
+    y <- y+1.5
+  }
+  if ( hauteur == 4){
+    y <- y+2.25
+  }
+  if ( hauteur == 5){
+    y <- y+3
+  }
+  polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
 }
 
+draw_rectangle(remplissage = 1,couleur = "turquoise2", 1)
 
+
+
+draw_card(1,2,3,3)
+
+
+png(filename = "/Users/cecile/git/set/inst/app/www/cards/test.jpg",
+    width = 400, height = 600, units = "px", pointsize = 12,
+    bg = "white")
+par(mar=rep(0.15,4))
+draw_card(3,3,3,3)
+dev.off()
+
+system.time(
+for (i in 1:nrow(jeu)){
+  filename <- paste("/Users/cecile/git/set/inst/app/www/cards/", jeu[i,"idcards"], ".png", sep="")
+  png(filename = filename,
+      width = 400, height = 600, units = "px", pointsize = 12,
+      bg = "white")
+  par(mar=rep(0.15,4))
+  draw_card(jeu[i,1],jeu[i,2],jeu[i,3],jeu[i,4])
+  dev.off()
+}
+)

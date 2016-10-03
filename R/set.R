@@ -41,3 +41,70 @@ verif_set <- function(id1,id2,id3){
   return(is_set(tab))
 }
 
+#'create un juego de SET! 81 cards in .png
+#'
+#' @param forme (1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)
+#' @return nothing
+draw_card<-function(forme, nombre, remplissage, couleur){
+  ### param couleur
+  vectcol<-c("deeppink1","darkorchid","turquoise2" )
+  couleur <- vectcol[couleur]
+  
+  ### param forme
+  if(forme == 1){# rectangle
+    x <- c(0.5,0.5,1.5,1.5)
+    y <- c(0.5, 1.5,1.5,0.5)
+  }
+  if(forme == 2){# cercle
+    z <- seq(0, 2*pi, length = 500)
+    x <- 1 + cos(z)*0.5
+    y <- 1 + sin(z)*0.5
+  }
+  if(forme == 3){# losange
+    x <- c(0.5,1,1.5,1)
+    y <- c(1,1.5,1,0.5)
+  }
+  
+  ### param remplissage
+  if (remplissage == 1){# 1 = vide
+    density <- NULL
+    angle <- NULL
+    border <- couleur
+    col <- NULL
+  }
+  if(remplissage == 2){# 2 = plein
+    density <- NULL
+    angle <- NULL
+    border <- couleur
+    col <- couleur
+  }
+  if(remplissage == 3){# 3 = hachures
+    density <- 7
+    angle <- 45
+    border <- NULL
+    col <- couleur
+  }
+  
+  ####### plot 
+  plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
+  box(lwd=4)
+  
+  ### param nombre
+  if(nombre == 1){
+    y <- y+1.5
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+  }
+  if(nombre == 2){
+    y <- y+0.75
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    y <- y+1.5
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+  }
+  if(nombre == 3){
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    y <- y+1.5
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    y <- y+1.5
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+  }
+}
