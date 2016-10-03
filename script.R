@@ -35,3 +35,46 @@ tab12[cbn[,110],]
 
 find_set(12,jeu)
 verif_set(1,2,3)
+
+
+#### jeu de cartes plot
+
+plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
+box()
+#losange violet hachuré
+polygon(x=c(0.5,1,1.5,1), y=c(1,1.5,1,0.5), density = c(7), angle = c(45), col="deeppink1", lwd=3)
+polygon(x=c(0.5,1,1.5,1), y=c(1,1.5,1,0.5)+1.5,  border = "darkorchid", col="darkorchid", lwd=3)
+polygon(x=c(0.5,1,1.5,1), y=c(1,1.5,1,0.5)+3, border="turquoise2", lwd=3)
+
+plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
+box()
+polygon(x=c(0.5,1,1.5,1), y=c(1,1.5,1,0.5)+0.75,  border = "darkorchid", col="darkorchid", lwd=3)
+polygon(x=c(0.5,1,1.5,1), y=c(1,1.5,1,0.5)+2.25, border="turquoise2", lwd=3)
+
+plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
+z <- seq(0, 2*pi, length = 500)
+polygon( 1 + cos(z)*.5, 1 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
+polygon( 1 + cos(z)*.5, 2.5 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
+polygon( 1 + cos(z)*.5, 4 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
+box()
+
+plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
+z <- seq(0, 2*pi, length = 500)
+polygon( 1 + cos(z)*.5, 1.75 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
+polygon( 1 + cos(z)*.5, 3.25 + sin(z)*.5 , col = "darkorchid", border = "darkorchid", lwd = 3, density = 7)
+box()
+
+
+plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
+polygon(x=c(0.5,0.5,1.5,1.5), y=c(0.5, 1.5,1.5,0.5), density = c(7), angle = c(45), col="deeppink1", lwd=3)
+polygon(x=c(0.5,0.5,1.5,1.5), y=1.5+c(0.5, 1.5,1.5,0.5), density = c(7), angle = c(45), col="deeppink1", lwd=3)
+polygon(x=c(0.5,0.5,1.5,1.5), y=3+c(0.5, 1.5,1.5,0.5), density = c(7), angle = c(45), col="deeppink1", lwd=3)
+box()
+
+?switch
+draw_card<-function(forme, nombre, remplissage, couleur){
+  vectcol<-c("deeppink1","darkorchid","turquoise2" )
+  couleur <- vectcol[couleur]
+}
+
+
