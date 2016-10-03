@@ -127,6 +127,7 @@ dev.off()
 system.time(
 for (i in 1:nrow(jeu)){
   filename <- paste("/Users/cecile/git/set/inst/app/www/cards/", jeu[i,"idcards"], ".png", sep="")
+  print(filename)
   png(filename = filename,
       width = 400, height = 600, units = "px", pointsize = 12,
       bg = "white")

@@ -8,7 +8,7 @@
 library(shiny)
 library(dplyr)
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   jeu_start<- expand.grid( forme=1:3, nombre=1:3, remplissage=1:3, couleur=1:3 )
   #1 carte represente une ligne du tableau, on a le jeu de 81 cartes dans le tableau
   
@@ -31,17 +31,44 @@ shinyServer(function(input, output) {
   output$value2 <- renderPrint({ input$c2 })
   output$value3 <- renderPrint({ input$c3 })
   
-  
-   
-  output$distPlot <- renderPlot({
-    
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    
+
+  lapply( 1:nbcards, function(i){
+    output[[paste("image",i, sep="")]] <- renderImage({
+      # When input$n is 3, filename is ./images/image3.jpeg
+      filename <- normalizePath(file.path('/Users/cecile/git/set/inst/app/www/cards/', paste(tab[i,"idcards"], ".png", sep="")))
+      print(filename)
+      print(i)
+      print(tab[i,"idcards"])
+      # Return a list containing the filename and alt text
+      list(src = filename,
+           contentType = 'image/png',
+           width = 150,
+           height = 200)
+      
+    }, deleteFile = FALSE)
   })
   
+  # output$image1 <- renderImage({
+  #   # When input$n is 3, filename is ./images/image3.jpeg
+  #   filename <- normalizePath(file.path('/Users/cecile/git/set/inst/app/www/cards/', '1.png'))
+  #   
+  #   # Return a list containing the filename and alt text
+  #   list(src = filename,
+  #        contentType = 'image/png',
+  #        width = 150,
+  #        height = 200)
+  #   
+  # }, deleteFile = FALSE)
+  # 
+  # output$image2 <- renderImage({
+  #   # When input$n is 3, filename is ./images/image3.jpeg
+  #   filename <- normalizePath(file.path('/Users/cecile/git/set/inst/app/www/cards/', '2.png'))
+  #   
+  #   # Return a list containing the filename and alt text
+  #   list(src = filename,
+  #        contentType = 'image/png',
+  #        width = 150,
+  #        height = 200)
+  #   
+  # }, deleteFile = FALSE)
 })
