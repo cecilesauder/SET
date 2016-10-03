@@ -121,7 +121,7 @@ png(filename = "/Users/cecile/git/set/inst/app/www/cards/test.jpg",
     width = 400, height = 600, units = "px", pointsize = 12,
     bg = "white")
 par(mar=rep(0.15,4))
-draw_card(2,3,3,3)
+draw_card(3,3,3,3)
 dev.off()
 
 system.time(
