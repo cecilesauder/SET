@@ -145,4 +145,5 @@ getwd()
 #"C:/Users/Charles/Desktop/cec/SET"
 setwd("/Users/Charles/Desktop/cec/SET/inst/app")
 deployApp()
+#probleme de package a regler ulterieurement...
 
