@@ -35,7 +35,7 @@ shinyServer(function(input, output, session) {
   lapply( 1:nbcards, function(i){
     output[[paste("image",i, sep="")]] <- renderImage({
       # When input$n is 3, filename is ./images/image3.jpeg
-      filename <- normalizePath(file.path('/Users/cecile/git/set/inst/app/www/cards/', paste(tab[i,"idcards"], ".png", sep="")))
+      filename <- normalizePath(file.path( system.file( "app", "www", "cards", package = "SET" ), paste(tab[i,"idcards"], ".png", sep="")))
       print(filename)
       print(i)
       print(tab[i,"idcards"])
@@ -48,27 +48,5 @@ shinyServer(function(input, output, session) {
     }, deleteFile = FALSE)
   })
   
-  # output$image1 <- renderImage({
-  #   # When input$n is 3, filename is ./images/image3.jpeg
-  #   filename <- normalizePath(file.path('/Users/cecile/git/set/inst/app/www/cards/', '1.png'))
-  #   
-  #   # Return a list containing the filename and alt text
-  #   list(src = filename,
-  #        contentType = 'image/png',
-  #        width = 150,
-  #        height = 200)
-  #   
-  # }, deleteFile = FALSE)
-  # 
-  # output$image2 <- renderImage({
-  #   # When input$n is 3, filename is ./images/image3.jpeg
-  #   filename <- normalizePath(file.path('/Users/cecile/git/set/inst/app/www/cards/', '2.png'))
-  #   
-  #   # Return a list containing the filename and alt text
-  #   list(src = filename,
-  #        contentType = 'image/png',
-  #        width = 150,
-  #        height = 200)
-  #   
-  # }, deleteFile = FALSE)
+
 })
