@@ -7,6 +7,7 @@
 
 library(shiny)
 library(dplyr)
+library(SET)
 
 shinyServer(function(input, output, session) {
   jeu_start<- expand.grid( forme=1:3, nombre=1:3, remplissage=1:3, couleur=1:3 )
@@ -36,9 +37,7 @@ shinyServer(function(input, output, session) {
     output[[paste("image",i, sep="")]] <- renderImage({
       # When input$n is 3, filename is ./images/image3.jpeg
       filename <- normalizePath(file.path( system.file( "app", "www", "cards", package = "SET" ), paste(tab[i,"idcards"], ".png", sep="")))
-      print(filename)
-      print(i)
-      print(tab[i,"idcards"])
+
       # Return a list containing the filename and alt text
       list(src = filename,
            contentType = 'image/png',
