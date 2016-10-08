@@ -24,28 +24,43 @@ shinyServer(function(input, output, session) {
   #tableau de cartes
   tab<-jeu[1:nbcards,]
 
-  output$table <- renderTable({
-    tab
+ 
+  output$deck_cards <- renderUI({
+    
+    display_card <-function(i){
+      src <- sprintf("cards/%d.png", i)
+      alert_msg <- sprintf('alert("carte n°%d")', i)
+      tags$img(src = src,
+               width = 100, 
+               onclick = alert_msg)
+    }
+    list_cards <- lapply(tab$idcards, display_card)
+    div <- div(
+    list_cards[1:4],
+    br(),
+    br(),
+    list_cards[5:8],
+    br(),
+    br(),
+    list_cards[9:12]
+    )
+    div
+ 
   })
-  
-  output$value1 <- renderPrint({ input$c1 })
-  output$value2 <- renderPrint({ input$c2 })
-  output$value3 <- renderPrint({ input$c3 })
-  
 
-  lapply( 1:nbcards, function(i){
-    output[[paste("image",i, sep="")]] <- renderImage({
-      # When input$n is 3, filename is ./images/image3.jpeg
-      filename <- normalizePath(file.path( system.file( "app", "www", "cards", package = "SET" ), paste(tab[i,"idcards"], ".png", sep="")))
-
-      # Return a list containing the filename and alt text
-      list(src = filename,
-           contentType = 'image/png',
-           width = 150,
-           height = 200)
-      
-    }, deleteFile = FALSE)
-  })
+  # lapply( 1:nbcards, function(i){
+  #   output[[paste("image",i, sep="")]] <- renderImage({
+  #     # When input$n is 3, filename is ./images/image3.jpeg
+  #     filename <- normalizePath(file.path( system.file( "app", "www", "cards", package = "SET" ), paste(tab[i,"idcards"], ".png", sep="")))
+  # 
+  #     # Return a list containing the filename and alt text
+  #     list(src = filename,
+  #          contentType = 'image/png',
+  #          width = 150,
+  #          height = 200)
+  #     
+  #   }, deleteFile = FALSE)
+  # })
   
 
 })

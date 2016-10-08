@@ -23,23 +23,24 @@ shinyUI(fluidPage(
   
   # Show a plot of the generated distribution
   mainPanel(
-    fluidRow(
-      column(2,imageOutput("image1", click = NULL)),
-      column(2,imageOutput("image2", click = NULL)),
-      column(2,imageOutput("image3", click = NULL)),
-      column(2,imageOutput("image4", click = NULL))
-    ),
-    fluidRow(
-      column(2,imageOutput("image5", click = NULL)),
-      column(2,imageOutput("image6", click = NULL)),
-      column(2,imageOutput("image7", click = NULL)),
-      column(2,imageOutput("image8", click = NULL))
-    ),
-    fluidRow(
-      column(2,imageOutput("image9", click = NULL)),
-      column(2,imageOutput("image10", click = NULL)),
-      column(2,imageOutput("image11", click = NULL)),
-      column(2,imageOutput("image12", click = NULL))
-    )
+    htmlOutput( "deck_cards" )
+    # fluidRow(
+    #   column(2,imageOutput("image1", click = NULL)),
+    #   column(2,imageOutput("image2", click = NULL)),
+    #   column(2,imageOutput("image3", click = NULL)),
+    #   column(2,imageOutput("image4", click = NULL))
+    # ),
+    # fluidRow(
+    #   column(2,imageOutput("image5", click = NULL)),
+    #   column(2,imageOutput("image6", click = NULL)),
+    #   column(2,imageOutput("image7", click = NULL)),
+    #   column(2,imageOutput("image8", click = NULL))
+    # ),
+    # fluidRow(
+    #   column(2,imageOutput("image9", click = NULL)),
+    #   column(2,imageOutput("image10", click = NULL)),
+    #   column(2,imageOutput("image11", click = NULL)),
+    #   column(2,imageOutput("image12", click = NULL))
+    # )
   )
 ))
