@@ -20,47 +20,78 @@ shinyServer(function(input, output, session) {
   jeu <- jeu
   
   #Choix des cartes
-  nbcards<-12
+  ncards<-12
   #tableau de cartes
-  tab<-jeu[1:nbcards,]
+  tab<-jeu[1:ncards,]
 
  
   output$deck_cards <- renderUI({
     
     display_card <-function(i){
       src <- sprintf("cards/%d.png", i)
-      alert_msg <- sprintf('alert("carte n°%d")', i)
-      tags$img(src = src,
-               width = 100, 
-               onclick = alert_msg)
+      style <- if( i %in% selected_cards$data){
+        "border : 2px solid red"
+      }
+      tags$img(
+        src = src,
+        width = 150, 
+        onclick = sprintf( 'Shiny.onInputChange( "img_clicked", %d )', i ),
+        style = style
+      )
     }
-    list_cards <- lapply(tab$idcards, display_card)
+    allocate_cards <- function(cards){
+      split( cards, rep(1:3, length.out = length(cards))  )
+    }
     div <- div(
-    list_cards[1:4],
-    br(),
-    br(),
-    list_cards[5:8],
-    br(),
-    br(),
-    list_cards[9:12]
+      lapply(allocate_cards(tab$idcards), function(cards){
+        div(lapply(cards, display_card))
+      })
     )
     div
  
   })
-
-  # lapply( 1:nbcards, function(i){
-  #   output[[paste("image",i, sep="")]] <- renderImage({
-  #     # When input$n is 3, filename is ./images/image3.jpeg
-  #     filename <- normalizePath(file.path( system.file( "app", "www", "cards", package = "SET" ), paste(tab[i,"idcards"], ".png", sep="")))
-  # 
-  #     # Return a list containing the filename and alt text
-  #     list(src = filename,
-  #          contentType = 'image/png',
-  #          width = 150,
-  #          height = 200)
-  #     
-  #   }, deleteFile = FALSE)
-  # })
   
+  selected_cards<-reactiveValues( data = NULL)
+  reactive_selected_cards <- eventReactive(input$img_clicked,{
+    numcard <- input$img_clicked
+    if (length(selected_cards$data) < 3){
+      selected_cards$data <- c(selected_cards$data,numcard)
+    }
+    if( length(selected_cards$data ) == 3){
+      if(verif_set(selected_cards$data ,jeu)){
+        title <- "Set!"
+      }else{
+        title <- "FAIL"
+      }
+      showModal(modalDialog(
+        title = title,
+        footer = actionButton("ok", "OK"),
+        div(
+          lapply(selected_cards$data , function(i){
+            img(
+              src = sprintf("cards/%d.png", i),
+              width = 150
+            )
+          })
+        )
+      ))
+  
+    }
+    selected_cards$data 
+  })
+  
+  observeEvent(input$ok, {
+    selected_cards$data <- NULL
+    removeModal()
+  })
+  
+  output$card_clicked <- renderText({
+    if(is.null(reactive_selected_cards())){
+      "Aucune carte cliquée"
+    }else{
+      reactive_selected_cards()
+    }
+  })
+ 
 
 })

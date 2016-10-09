@@ -147,3 +147,14 @@ setwd("/Users/Charles/Desktop/cec/SET/inst/app")
 deployApp()
 #probleme de package a regler ulterieurement...
 
+
+allocate_cards <- function(ncards){
+  nrows <- 3
+  split( 1:ncards, rep(1:nrows, length.out = ncards)  )
+}
+x=f(12)
+x$`1`
+x[[1]]
+x
+
+list_cards[x[[1]]]

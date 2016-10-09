@@ -11,7 +11,8 @@ different_ <- function(trio){#trio est un dataframe de 3 lignes et 1 colonne
   trio[1]!=trio[2] & trio[2]!=trio[3] & trio[1]!=trio[3]
 }
 
-#######test si un trio est ou tout egal ou tout different
+
+
 is_set_1col <- function(trio){
  egal_(trio) | different_(trio)
 }
@@ -36,8 +37,9 @@ find_set<-function(nbcards,jeu){
 
 #' @importFrom dplyr filter
 #' @importFrom magrittr %>%
-verif_set <- function(id1,id2,id3){
-  tab <-jeu %>% filter(idcards == id1 | idcards == id2 | idcards == id3)
+#' @export
+verif_set <- function(trio,jeu){
+  tab <-jeu[jeu$idcards %in% trio,]
   return(is_set(tab))
 }
 
