@@ -24,6 +24,9 @@ shinyServer(function(input, output, session) {
   ncards<-12
   #tableau de cartes
   tab<-jeu[1:ncards,]
+  
+  #table de jeu prete a afficher :
+  table <- allocate_cards(tab$idcards)
 
  
   output$deck_cards <- renderUI({
