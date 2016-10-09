@@ -2,6 +2,7 @@
 
 export(SETwidget)
 export(SETwidgetOutput)
+export(allocate_cards)
 export(egal_)
 export(renderSETwidget)
 export(verif_set)

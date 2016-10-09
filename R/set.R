@@ -43,6 +43,16 @@ verif_set <- function(trio,jeu){
   return(is_set(tab))
 }
 
+#' fonction qui repartie les cartes pour les afficher sur la table
+#' 
+#' @param une liste d'idcards
+#' @return une liste de 3 vecteurs ( pour les 3 lignes affichees)
+#' @export
+allocate_cards <- function(cards){
+  split( cards, rep(1:3, length.out = length(cards))  )
+}
+
+
 #'create un juego de SET! 81 cards in .png
 #'
 #' @param forme (1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)
