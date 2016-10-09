@@ -29,7 +29,7 @@ shinyServer(function(input, output, session) {
   table <- allocate_cards(tab$idcards)
   names(table) <- NULL
   
-  output$truc <- renderSETwidget({
+  output$cards <- renderSETwidget({
     SETwidget(table)
   })
 

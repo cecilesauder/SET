@@ -7,10 +7,12 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
 
     // TODO: define shared variables for this instance
+    
     image = function(idcard){
       var im = $('<img class="card"></img>') ; 
       im.attr("src", "cards/" + idcard  + ".png")  ;
-      im.attr("width", 150) ;
+      im.width(150) ;
+      im.on("click", "alert(" + idcard + ")") ;
       return im ;
     };
     ligne = function(tabcards){
