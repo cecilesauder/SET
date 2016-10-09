@@ -126,12 +126,12 @@ dev.off()
 
 system.time(
 for (i in 1:nrow(jeu)){
-  filename <- paste("/Users/cecile/git/set/inst/app/www/cards/", jeu[i,"idcards"], ".png", sep="")
+  filename <- paste("/home/bulle/git/SET/inst/app/www/cards/", jeu[i,"idcards"], ".png", sep="")
   print(filename)
   png(filename = filename,
       width = 400, height = 600, units = "px", pointsize = 12,
       bg = "white")
-  par(mar=rep(0.15,4))
+  par(mar=rep(0,4))
   draw_card(jeu[i,1],jeu[i,2],jeu[i,3],jeu[i,4])
   dev.off()
 }
