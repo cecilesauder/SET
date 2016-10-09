@@ -8,6 +8,7 @@
 library(shiny)
 library(dplyr)
 library(SET)
+library(htmlwidgets)
 
 shinyServer(function(input, output, session) {
   jeu_start<- expand.grid( forme=1:3, nombre=1:3, remplissage=1:3, couleur=1:3 )
