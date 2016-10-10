@@ -119,3 +119,23 @@ draw_card<-function(forme, nombre, remplissage, couleur){
     polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
   }
 }
+
+
+#' create a gameplay of 81 cards
+#' @param none
+#' @return a 81*5 data.frame
+#' @export
+create_gameplay <- function(){  
+  expand.grid( forme=1:3, nombre=1:3, remplissage=1:3, couleur=1:3 ) %>%
+    mutate(idcards = row_number() )
+}
+
+#' draw ncards randomly 
+#' @param ncards : an integer and jeu : a data.frame with the game play
+#' @return a list of 2 data.frame : drawn_cards and remaining_cards
+#' @export
+draw_cards <- function(ncards, jeu){
+  drawn_cards <- jeu %>% sample_n(ncards)
+  remaining_cards <- jeu %>% filter(!idcards %in% drawn_cards$idcards)
+  list(drawn_cards = drawn_cards, remaining_cards = remaining_cards)
+}
