@@ -1,0 +1,9 @@
+language: R
+sudo: required
+dist: trusty
+cache: packages
+r:
+  - release
+  - devel
+
+warnings_are_errors: false

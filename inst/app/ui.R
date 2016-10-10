@@ -14,13 +14,12 @@ shinyUI(fluidPage(
   
   sidebarPanel(
     #actionButton("new_game", label = "New game"),
-    actionButton("action", label = "SET !"),
-    textOutput("card_clicked")
+    actionButton("action", label = "SET !")
   ),
   
   # Show a plot of the generated distribution
   mainPanel(
-    htmlOutput( "deck_cards" )
-  
+    SETwidgetOutput('cards')
+
   )
 ))

@@ -43,6 +43,16 @@ verif_set <- function(trio,jeu){
   return(is_set(tab))
 }
 
+#' fonction qui repartie les cartes pour les afficher sur la table
+#' 
+#' @param une liste d'idcards
+#' @return une liste de 3 vecteurs ( pour les 3 lignes affichees)
+#' @export
+allocate_cards <- function(cards){
+  split( cards, rep(1:3, length.out = length(cards))  )
+}
+
+
 #'create un juego de SET! 81 cards in .png
 #'
 #' @param forme (1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)
@@ -89,8 +99,7 @@ draw_card<-function(forme, nombre, remplissage, couleur){
   
   ####### plot 
   plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
-  box(lwd=4)
-  
+
   ### param nombre
   if(nombre == 1){
     y <- y+1.5
@@ -109,4 +118,24 @@ draw_card<-function(forme, nombre, remplissage, couleur){
     y <- y+1.5
     polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
   }
+}
+
+
+#' create a gameplay of 81 cards
+#' @param none
+#' @return a 81*5 data.frame
+#' @export
+create_gameplay <- function(){  
+  expand.grid( forme=1:3, nombre=1:3, remplissage=1:3, couleur=1:3 ) %>%
+    mutate(idcards = row_number() )
+}
+
+#' draw ncards randomly 
+#' @param ncards : an integer and jeu : a data.frame with the game play
+#' @return a list of 2 data.frame : drawn_cards and remaining_cards
+#' @export
+draw_cards <- function(ncards, jeu){
+  drawn_cards <- jeu %>% sample_n(ncards)
+  remaining_cards <- jeu %>% filter(!idcards %in% drawn_cards$idcards)
+  list(drawn_cards = drawn_cards, remaining_cards = remaining_cards)
 }
