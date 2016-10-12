@@ -15,4 +15,8 @@ a list of 2 data.frame : drawn_cards and remaining_cards
 \description{
 draw ncards randomly
 }
+\examples{
+draw_cards( 12, create_gameplay() )
+
+}
 

@@ -62,6 +62,7 @@ allocate_cards <- function(cards){
 #' @param couleur (1/2/3)
 #' @return nothing
 #' 
+#' @importFrom graphics polygon
 #' @export
 draw_card<-function(forme, nombre, remplissage, couleur){
   ### param couleur
@@ -128,10 +129,11 @@ draw_card<-function(forme, nombre, remplissage, couleur){
 
 
 #' create a gameplay of 81 cards
-#' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
-#' @param none
+#' 
 #' @return a 81*5 data.frame
+#' 
+#' @importFrom dplyr mutate row_number
+#' @importFrom magrittr %>%
 #' @export
 create_gameplay <- function(){  
   expand.grid( forme=1:3, nombre=1:3, remplissage=1:3, couleur=1:3 ) %>%
@@ -139,10 +141,15 @@ create_gameplay <- function(){
 }
 
 #' draw ncards randomly 
-#' @importFrom dplyr sample_n filter
-#' @importFrom magrittr %>%
+#' 
 #' @param ncards : an integer and jeu : a data.frame with the game play
 #' @return a list of 2 data.frame : drawn_cards and remaining_cards
+#' 
+#' @examples 
+#' draw_cards( 12, create_gameplay() )
+#' 
+#' @importFrom dplyr sample_n filter
+#' @importFrom magrittr %>%
 #' @export
 draw_cards <- function(ncards, jeu){
   drawn_cards <- jeu %>% sample_n(ncards)
