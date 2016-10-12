@@ -97,7 +97,7 @@ draw_card<-function(forme, nombre, remplissage, couleur){
     border <- NULL
     col <- couleur
   }
-  
+  ###
   ####### plot 
   plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
 
