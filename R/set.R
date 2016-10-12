@@ -57,6 +57,7 @@ allocate_cards <- function(cards){
 #'
 #' @param forme (1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)
 #' @return nothing
+#' @export
 draw_card<-function(forme, nombre, remplissage, couleur){
   ### param couleur
   vectcol<-c("deeppink1","darkorchid","turquoise2" )
@@ -103,7 +104,7 @@ draw_card<-function(forme, nombre, remplissage, couleur){
   ### param nombre
   if(nombre == 1){
     y <- y+1.5
-    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=6)
   }
   if(nombre == 2){
     y <- y+0.75
@@ -122,6 +123,8 @@ draw_card<-function(forme, nombre, remplissage, couleur){
 
 
 #' create a gameplay of 81 cards
+#' @importFrom dplyr mutate
+#' @importFrom magrittr %>%
 #' @param none
 #' @return a 81*5 data.frame
 #' @export
@@ -131,6 +134,8 @@ create_gameplay <- function(){
 }
 
 #' draw ncards randomly 
+#' @importFrom dplyr sample_n filter
+#' @importFrom magrittr %>%
 #' @param ncards : an integer and jeu : a data.frame with the game play
 #' @return a list of 2 data.frame : drawn_cards and remaining_cards
 #' @export
