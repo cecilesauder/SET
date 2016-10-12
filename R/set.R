@@ -47,16 +47,21 @@ verif_set <- function(trio,jeu){
 #' 
 #' @param une liste d'idcards
 #' @return une liste de 3 vecteurs ( pour les 3 lignes affichees)
+#' 
 #' @export
 allocate_cards <- function(cards){
   split( cards, rep(1:3, length.out = length(cards))  )
 }
 
 
-#'create un juego de SET! 81 cards in .png
+#' create un juego de SET! 81 cards in .png
 #'
-#' @param forme (1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)
+#' @param forme (1 : rectangle, 2: circle, 3:losange)
+#' @param nombre (1/2/3)
+#' @param remplissage (vide / plein / hachure)
+#' @param couleur (1/2/3)
 #' @return nothing
+#' 
 #' @export
 draw_card<-function(forme, nombre, remplissage, couleur){
   ### param couleur

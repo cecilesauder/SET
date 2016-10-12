@@ -7,7 +7,13 @@
 draw_card(forme, nombre, remplissage, couleur)
 }
 \arguments{
-\item{forme}{(1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)}
+\item{forme}{(1 : rectangle, 2: circle, 3:losange)}
+
+\item{nombre}{(1/2/3)}
+
+\item{remplissage}{(vide / plein / hachure)}
+
+\item{couleur}{(1/2/3)}
 }
 \value{
 nothing
