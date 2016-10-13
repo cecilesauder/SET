@@ -16,7 +16,8 @@ shinyUI(fluidPage(
   
   sidebarPanel(
     #actionButton("new_game", label = "New game"),
-    actionButton("action", label = "SET !")
+    actionButton("action", label = "SET !"),
+    verbatimTextOutput("sel_cards")
   ),
   
   # Show a plot of the generated distribution
