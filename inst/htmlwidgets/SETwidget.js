@@ -40,6 +40,7 @@ HTMLWidgets.widget({
           im.attr("class", "selected_card");
           add_selected_card(idcard);
         }
+        
 
     } ;
     
@@ -59,6 +60,11 @@ HTMLWidgets.widget({
       }
       return div;
     };
+    
+    Shiny.addCustomMessageHandler("is_set",
+        function(is_set) {
+          alert(is_set);
+    });
 
     return {
 
