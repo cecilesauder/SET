@@ -1,12 +1,12 @@
 .card{
   margin: 5px;
   border-radius: 20px;
-  border: solid black 2px;
+  border: solid black 3px;
 }
 
 .selected_card{
   margin: 5px;
   border-radius: 20px;
-  border: solid red 4px;
+  border: solid red 8px;
   
 }
