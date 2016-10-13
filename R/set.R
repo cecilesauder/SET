@@ -47,16 +47,17 @@ verif_set <- function(trio,jeu){
 #' 
 #' @param une liste d'idcards
 #' @return une liste de 3 vecteurs ( pour les 3 lignes affichees)
+#' 
 #' @export
 allocate_cards <- function(cards){
   split( cards, rep(1:3, length.out = length(cards))  )
 }
 
 
-#'create un juego de SET! 81 cards in .png
-#'@return time elapsed to draw the game
-#'@export
+#' create un juego de SET! 81 cards in .png
 #'
+#' @param jeu data.frame created by create_game
+#' @return time elapsed
 draw_game <-function(jeu){
   system.time(
     for (i in 1:nrow(jeu)){
@@ -71,13 +72,15 @@ draw_game <-function(jeu){
   )
 }
 
-#'
-#'
-#'
-#'
+
 #' dibujar una carta
-#' @param forme (1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)
-#' @return nothing
+#' 
+#' @param forme (1 : rectangle, 2: circle, 3:losange)
+#' @param nombre (1/2/3)
+#' @param remplissage (vide / plein / hachure)
+#' @param couleur (1/2/3)
+#' 
+#' @importFrom graphics polygon
 #' @export
 draw_card<-function(forme, nombre, remplissage, couleur){
   ### param couleur
@@ -145,10 +148,11 @@ draw_card<-function(forme, nombre, remplissage, couleur){
 
 
 #' create a gameplay of 81 cards
-#' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
-#' @param none
+#' 
 #' @return a 81*5 data.frame
+#' 
+#' @importFrom dplyr mutate row_number
+#' @importFrom magrittr %>%
 #' @export
 create_gameplay <- function(){  
   expand.grid( forme=1:3, nombre=1:3, remplissage=1:3, couleur=1:3 ) %>%
@@ -156,10 +160,15 @@ create_gameplay <- function(){
 }
 
 #' draw ncards randomly 
-#' @importFrom dplyr sample_n filter
-#' @importFrom magrittr %>%
+#' 
 #' @param ncards : an integer and jeu : a data.frame with the game play
 #' @return a list of 2 data.frame : drawn_cards and remaining_cards
+#' 
+#' @examples 
+#' draw_cards( 12, create_gameplay() )
+#' 
+#' @importFrom dplyr sample_n filter
+#' @importFrom magrittr %>%
 #' @export
 draw_cards <- function(ncards, jeu){
   drawn_cards <- jeu %>% sample_n(ncards)
