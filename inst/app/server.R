@@ -22,8 +22,18 @@ shinyServer(function(input, output, session) {
     SETwidget(table)
   })
   
-  output$sel_cards = renderPrint({
+  output$sel_cards = renderText({
     input$selected_cards
+    #print(input$selected_cards)
+    if(length(input$selected_cards) == 3 ){
+      is_set <-tab %>% filter( idcards %in% input$selected_cards) %>% is_set
+      if(is_set){
+        session$sendCustomMessage(type = "is_set", "SET!")
+      }
+    }
+    return(input$selected_cards)
   })
+  
+  #print(input$sel_cards)
 
 })
