@@ -54,7 +54,28 @@ allocate_cards <- function(cards){
 
 
 #'create un juego de SET! 81 cards in .png
+#'@return time elapsed to draw the game
+#'@export
 #'
+draw_game <-function(jeu){
+  system.time(
+    for (i in 1:nrow(jeu)){
+      filename <- paste("/home/cecile/git/SET/inst/app/www/cards/", jeu[i,"idcards"], ".png", sep="")
+      png(filename = filename,
+          width = 400, height = 600, units = "px", pointsize = 12,
+          bg = "white")
+      par(mar=rep(0,4))
+      draw_card(jeu[i,1],jeu[i,2],jeu[i,3],jeu[i,4])
+      dev.off()
+    }
+  )
+}
+
+#'
+#'
+#'
+#'
+#' dibujar una carta
 #' @param forme (1 : rectangle, 2: circle, 3:losange), nombre (1/2/3), remplissage (vide / plein / hachure), couleur (1/2/3)
 #' @return nothing
 #' @export
@@ -92,7 +113,7 @@ draw_card<-function(forme, nombre, remplissage, couleur){
     col <- couleur
   }
   if(remplissage == 3){# 3 = hachures
-    density <- 7
+    density <- 3
     angle <- 45
     border <- NULL
     col <- couleur
@@ -102,22 +123,23 @@ draw_card<-function(forme, nombre, remplissage, couleur){
   plot(x=c(0.3,1.7), y=c(0,5), type='n', xlab = "", ylab = "", axes = FALSE)
 
   ### param nombre
+  lwd <-10
   if(nombre == 1){
     y <- y+1.5
-    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=6)
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=lwd)
   }
   if(nombre == 2){
     y <- y+0.75
-    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=lwd)
     y <- y+1.5
-    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=lwd)
   }
   if(nombre == 3){
-    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=lwd)
     y <- y+1.5
-    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=lwd)
     y <- y+1.5
-    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=3)
+    polygon(x=x, y=y, density = density, angle = angle, col=col, border = border, lwd=lwd)
   }
 }
 

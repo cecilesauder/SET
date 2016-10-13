@@ -2,7 +2,7 @@
 % Please edit documentation in R/set.R
 \name{draw_card}
 \alias{draw_card}
-\title{create un juego de SET! 81 cards in .png}
+\title{dibujar una carta}
 \usage{
 draw_card(forme, nombre, remplissage, couleur)
 }
@@ -13,6 +13,6 @@ draw_card(forme, nombre, remplissage, couleur)
 nothing
 }
 \description{
-create un juego de SET! 81 cards in .png
+dibujar una carta
 }
 
