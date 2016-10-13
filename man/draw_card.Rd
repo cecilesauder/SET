@@ -15,9 +15,6 @@ draw_card(forme, nombre, remplissage, couleur)
 
 \item{couleur}{(1/2/3)}
 }
-\value{
-nothing
-}
 \description{
 dibujar una carta
 }

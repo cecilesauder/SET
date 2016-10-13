@@ -6,8 +6,11 @@
 \usage{
 draw_game(jeu)
 }
+\arguments{
+\item{jeu}{data.frame created by create_game}
+}
 \value{
-time elapsed to draw the game
+time elapsed
 }
 \description{
 create un juego de SET! 81 cards in .png
