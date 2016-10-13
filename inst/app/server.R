@@ -21,5 +21,9 @@ shinyServer(function(input, output, session) {
   output$cards <- renderSETwidget({
     SETwidget(table)
   })
+  
+  output$sel_cards = renderPrint({
+    input$selected_cards
+  })
 
 })
