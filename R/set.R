@@ -18,7 +18,7 @@ is_set_1col <- function(trio){
 }
 
 ###########function is_set qui teste un tableau de 3*4 colonne et return TRUE si y a SET et FALSE
-
+#' @export
 is_set <- function(df){
   is_set_1col(df[,1]) & is_set_1col(df[,2]) & is_set_1col(df[,3]) & is_set_1col(df[,4]) 
 }
