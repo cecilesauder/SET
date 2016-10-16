@@ -1,14 +1,6 @@
-
-# This is the server logic for a Shiny web application.
-# You can find out more about building applications with Shiny here:
-# 
-# http://www.rstudio.com/shiny/
-#
-
 library(shiny)
 library(dplyr)
 library(SET)
-library(htmlwidgets)
 
 shinyServer(function(input, output, session) {
   
@@ -19,19 +11,25 @@ shinyServer(function(input, output, session) {
   table <- allocate_cards(tab$idcards)
   names(table) <- NULL
   
-  
+  # prints the currently selected cards
   output$sel_cards = renderText({
-    input$selected_cards
-    #print(input$selected_cards)
-    if(length(input$selected_cards) == 3 ){
-      is_set <-tab %>% filter( idcards %in% input$selected_cards) %>% is_set
+    cards <- input$selected_cards
+    if( is.null(cards) ) "" else paste( cards, collapse = ", " )
+  })
+  
+  # observes changes in selected cards (input$selected_cards)
+  # and triggers the is_set message if they are a SET
+  observe({
+    cards <- input$selected_cards
+    if(length(cards) == 3 ){
+      is_set <-tab %>% filter( idcards %in% cards) %>% is_set
       if(is_set){
         session$sendCustomMessage(type = "is_set", "SET!")
       }
     }
-    return(input$selected_cards)
   })
   
+  # sends the message to initialize the table of cards
   session$sendCustomMessage( 
     type = "init_set", 
     list( id = "cards", table = table)

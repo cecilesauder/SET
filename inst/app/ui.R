@@ -17,18 +17,15 @@ shinyUI(fluidPage(
   ), 
                    
                    
-  # Application title
   headerPanel("SET"),
   
   sidebarPanel(
-    #actionButton("new_game", label = "New game"),
     actionButton("action", label = "SET !"),
     textOutput("sel_cards")
-    
   ),
   
-  # Show a plot of the generated distribution
   mainPanel(
     htmlOutput('cards')
   )
+  
 ))

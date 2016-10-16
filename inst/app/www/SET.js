@@ -1,42 +1,50 @@
 
 var SET_game = function(){
-
-  var selected_cards = [] ;
+  
+  // the id of the div where we store the cards ... 
+  // see htmlOutput('cards') in ui.R
   var set_id ; 
   
-  update_selected = function(){
-    Shiny.onInputChange( "selected_cards", selected_cards ) ; 
-  } ;
-
-  add_selected_card = function(id){
-    selected_cards.push(id) ;
-    update_selected();
-  } ;
-
-  rm_selected_card = function(id){
-    index = selected_cards.indexOf(id) ;
-    selected_cards.splice(index, 1) ;
-    update_selected();
-  } ;
-
-  clear_selected_card = function(){
-    selected_cards = [] ;
-    update_selected();
-  } ;
+  class SelectedCards {
+    constructor(){
+      this.selected_cards = [] ;
+    }
+    
+    update(){
+      console.log( "SelectedCards::update()" ) ;
+      Shiny.onInputChange( "selected_cards", this.selected_cards ) ;   
+    }
+    
+    add( id ){
+      this.selected_cards.push(id) ; 
+      this.update() ;
+    }
+   
+    rm( id ){
+      index = this.selected_cards.indexOf(id) ;
+      this.selected_cards.splice(index, 1) ;
+      this.update();
+    } 
+    
+    clear(){
+      this.selected_cards = [] ;
+      this.update();
+    }
+    
+  }
+  
+  var selected = new SelectedCards() ;
   
   click_card = function(){ 
-      //alert( idcard );
-      var im =$(this);
-      var idcard = im.attr("id");
-      if( im.hasClass("selected_card") ){
-        im.attr("class", "card");
-        rm_selected_card(idcard);
-      }else{
-        im.attr("class", "selected_card");
-        add_selected_card(idcard);
-      }
-      
-
+    var im =$(this);
+    var idcard = im.attr("id");
+    if( im.hasClass("selected_card") ){
+      im.attr("class", "card");
+      selected.rm(idcard);
+    } else{
+      im.attr("class", "selected_card");
+      selected.add(idcard);
+    }
   } ;
   
   image = function(idcard){
@@ -56,12 +64,16 @@ var SET_game = function(){
     return div;
   };
   
+  // listening to is_set event triggered on the server.R by 
+  // session$sendCustomMessage( type = "is_set" )
   Shiny.addCustomMessageHandler("is_set",
-      function(is_set) {
-        alert(is_set);
-      }
+    function(is_set) {
+      alert(is_set);
+    }
   );
 
+  // listening to init_set event triggered on the server.R by 
+  // session$sendCustomMessage( type = "init_set" )
   Shiny.addCustomMessageHandler("init_set", function(x){
     set_id = x.id ;
     $el = $( "#" + set_id ) ;
@@ -75,4 +87,5 @@ var SET_game = function(){
 
 } ;
 
+// trigerred when the document is ready
 $(SET_game) ; 
