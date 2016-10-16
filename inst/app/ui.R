@@ -8,8 +8,7 @@ shinyUI(fluidPage(
   tags$head( 
    tags$script(src="SET.js")
   ), 
-  purrple_logo(), 
-
+  
   headerPanel("SET"),
   
   sidebarPanel(
