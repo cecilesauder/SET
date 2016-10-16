@@ -11,7 +11,6 @@ var SET_game = function(){
     }
     
     update(){
-      console.log( "SelectedCards::update()" ) ;
       Shiny.onInputChange( "selected_cards", this.selected_cards ) ;   
     }
     
@@ -21,7 +20,7 @@ var SET_game = function(){
     }
    
     rm( id ){
-      index = this.selected_cards.indexOf(id) ;
+      var index = this.selected_cards.indexOf(id) ;
       this.selected_cards.splice(index, 1) ;
       this.update();
     } 
