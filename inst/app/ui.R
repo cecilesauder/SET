@@ -9,8 +9,14 @@ library(shiny)
 library(SET)
 
 
-shinyUI(fluidPage(
+shinyUI(fluidPage( 
+  theme = "SET.css", 
   
+  tags$head( 
+   tags$script(src="SET.js")
+  ), 
+                   
+                   
   # Application title
   headerPanel("SET"),
   
@@ -23,7 +29,6 @@ shinyUI(fluidPage(
   
   # Show a plot of the generated distribution
   mainPanel(
-    SETwidgetOutput('cards')
-
+    htmlOutput('cards')
   )
 ))

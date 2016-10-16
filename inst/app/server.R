@@ -11,6 +11,7 @@ library(SET)
 library(htmlwidgets)
 
 shinyServer(function(input, output, session) {
+  
   ncards <- 12
   list_df_cards <- draw_cards(ncards,create_gameplay())
   tab <- list_df_cards$drawn_cards
@@ -18,9 +19,6 @@ shinyServer(function(input, output, session) {
   table <- allocate_cards(tab$idcards)
   names(table) <- NULL
   
-  output$cards <- renderSETwidget({
-    SETwidget(table)
-  })
   
   output$sel_cards = renderText({
     input$selected_cards
@@ -34,6 +32,9 @@ shinyServer(function(input, output, session) {
     return(input$selected_cards)
   })
   
-  #print(input$sel_cards)
-
+  session$sendCustomMessage( 
+    type = "init_set", 
+    list( id = "cards", table = table)
+  )
+  
 })

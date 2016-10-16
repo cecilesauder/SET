@@ -2,7 +2,8 @@ Package: SET
 Title: SET, the game
 Version: 0.0.0
 Authors@R: c(
-  person("Cécile", "Sauder", email = "cecile.sauder@gmail.com", role = c("aut", "cre"))
+  person("Cécile", "Sauder", email = "cecile@purrple.cat", role = c("aut", "cre")), 
+  person("Romain", "François", email = "romain@purrple.cat", role = "aut")
   )
 Description: SET, the game.
 Depends:
@@ -11,5 +12,5 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
-Suggests: testthat
-Imports: shiny, dplyr, utils, magrittr, htmlwidgets
+Suggests: testthat, shiny
+Imports: dplyr, utils, magrittr

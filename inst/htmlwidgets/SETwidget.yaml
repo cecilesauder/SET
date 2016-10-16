@@ -1,6 +1,0 @@
-# (uncomment to add a dependency)
-dependencies:
-- name: SETwidget
-  version: 0.0.0
-  src: htmlwidgets
-  style: ./lib/SET.css
