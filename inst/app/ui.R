@@ -1,6 +1,6 @@
 library(shiny)
 library(SET)
-library(purrpleWidgets)
+library(purrple)
 
 shinyUI(fluidPage( 
   theme = "SET.css", 
