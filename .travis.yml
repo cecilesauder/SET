@@ -7,3 +7,8 @@ r:
   - devel
 
 warnings_are_errors: false
+
+r_github_packages:
+  - purrple/purrple
+
+
