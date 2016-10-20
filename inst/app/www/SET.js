@@ -1,10 +1,6 @@
 
 var SET_game = function(){
   
-  // the id of the div where we store the cards ... 
-  // see htmlOutput('cards') in ui.R
-  var set_id ; 
-  
   class SelectedCards {
     constructor(){
       this.selected_cards = [] ;
@@ -74,11 +70,9 @@ var SET_game = function(){
   // listening to init_set event triggered on the server.R by 
   // session$sendCustomMessage( type = "init_set" )
   Shiny.addCustomMessageHandler("init_set", function(x){
-    set_id = x.id ;
-    $el = $( "#" + set_id ) ;
+    var $el = $( "#cards" ) ;
     var table = x.table;
     var nrow = table.length;
-    console.log(table);
     for (var iter=0; iter < nrow; iter++){
       $el.append(ligne(table[iter]));
     }

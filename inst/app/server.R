@@ -32,7 +32,7 @@ shinyServer(function(input, output, session) {
   # sends the message to initialize the table of cards
   session$sendCustomMessage( 
     type = "init_set", 
-    list( id = "cards", table = table)
+    list( table = table)
   )
   
 })
