@@ -43,7 +43,7 @@ $( function(){
   } ;
   
   image = function(idcard){
-    var im = $('<img class="card"></img>') ; 
+    var im = $('<img class="card">') ; 
     im.attr("src", "cards/" + idcard  + ".png")  ;
     im.attr("id", idcard) ;
     im.width(150) ;
@@ -52,10 +52,10 @@ $( function(){
   };
   
   ligne = function(tabcards){
-    var div = $("<div></div>");
-    for(var iter=0; iter < tabcards.length; iter++){
+    var div = $("<div>");
+    tabcards.map( function(i){
       div.append(image(tabcards[iter]));
-    }
+    }) ;
     return div;
   };
   
