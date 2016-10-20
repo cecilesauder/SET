@@ -70,11 +70,11 @@ var SET_game = function(){
   // listening to init_set event triggered on the server.R by 
   // session$sendCustomMessage( type = "init_set" )
   Shiny.addCustomMessageHandler("init_set", function(x){
-    var $el = $( "#cards" ) ;
+    var $cards = $( "#cards" ) ;
     var table = x.table;
     var nrow = table.length;
     for (var iter=0; iter < nrow; iter++){
-      $el.append(ligne(table[iter]));
+      $cards.append(ligne(table[iter]));
     }
   }) ;
 
