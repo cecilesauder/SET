@@ -1,32 +1,32 @@
-
-var SET_game = function(){
-  
-  class SelectedCards {
-    constructor(){
-      this.selected_cards = [] ;
-    }
-    
-    update(){
-      Shiny.onInputChange( "selected_cards", this.selected_cards ) ;   
-    }
-    
-    add( id ){
-      this.selected_cards.push(id) ; 
-      this.update() ;
-    }
-   
-    rm( id ){
-      var index = this.selected_cards.indexOf(id) ;
-      this.selected_cards.splice(index, 1) ;
-      this.update();
-    } 
-    
-    clear(){
-      this.selected_cards = [] ;
-      this.update();
-    }
-    
+class SelectedCards {
+  constructor(){
+    this.selected_cards = [] ;
   }
+  
+  update(){
+    Shiny.onInputChange( "selected_cards", this.selected_cards ) ;   
+  }
+  
+  add( id ){
+    this.selected_cards.push(id) ; 
+    this.update() ;
+  }
+ 
+  rm( id ){
+    var index = this.selected_cards.indexOf(id) ;
+    this.selected_cards.splice(index, 1) ;
+    this.update();
+  } 
+  
+  clear(){
+    this.selected_cards = [] ;
+    this.update();
+  }
+  
+}
+
+  
+$( function(){
   
   var selected = new SelectedCards() ;
   
@@ -78,7 +78,4 @@ var SET_game = function(){
     }
   }) ;
 
-} ;
-
-// trigerred when the document is ready
-$(SET_game) ; 
+} ) ;
