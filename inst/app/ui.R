@@ -2,7 +2,8 @@ library(shiny)
 library(SET)
 library(purrple)
 
-shinyUI(fluidPage( 
+page <- purrplePage(fluidPage)
+shinyUI(page( 
   theme = "SET.css", 
   
   tags$head( 
